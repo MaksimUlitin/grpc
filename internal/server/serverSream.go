@@ -1,18 +1,19 @@
 package main
 
 import (
-	pb "github.com/maksimUlitin/proto"
 	"log"
 	"time"
+
+	pb "github.com/maksimUlitin/proto"
 )
 
-func (s *helloServer) SayHelloServerStreaming(req *pb.NamesList, stream pb.GreetService_SeyHelloClientStreamingClient) error {
-	log.Printf("request with names: %v ", pb.NamesList{})
+func (s *helloServer) SayHelloServerStreaming(req *pb.NamesList, stream pb.GreetService_SayHelloServerStreamingServer) error {
+	log.Printf("request with names: %v ", req.Names)
 	for _, name := range req.Names {
 		res := &pb.HelloResponse{
 			Message: "Hello" + name,
 		}
-		if err := stream.Send(res); err != nil {
+		if err := stream.send; err != nil {
 			return err
 		}
 		time.Sleep(2 * time.Second)
