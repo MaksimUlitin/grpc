@@ -9,12 +9,12 @@ import (
 
 var messages []string
 
-func (s *helloServer) SayHelloClientStreaming(stream pb.GreetService_SeyHelloClientStreamingServer) error {
+func (s *helloServer) SayHelloClientStreaming(stream pb.GreetService_SayHelloClientStreamingServer) error {
 
 	for {
 		req, err := stream.Recv()
 		if err == io.EOF {
-			return stream.SendAndClose(&pb.MessagesList{Message: messages})
+			return stream.SendAndClose(&pb.MessagesList{Messages: messages})
 		}
 		if err != nil {
 			return err

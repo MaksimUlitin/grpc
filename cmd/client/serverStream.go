@@ -7,14 +7,14 @@ import (
 	"log"
 )
 
-func CallSayHelloServerStreaming(client pb.GreetServiceClient, names *pb.NamesList) {
+func callSayHelloServerStreaming(client pb.GreetServiceClient, names *pb.NamesList) {
 	log.Printf("streaming starting")
-	stream, err := client.SeyHelloClientStreaming(context.Background(), names)
+	stream, err := client.SayHelloServerStreaming(context.Background(), names)
 	if err != nil {
-		log.Fatalf("could not send names %v", names)
+		log.Fatalf("could not send names %v", err)
 	}
 	for {
-		message, err := sream.Recv()
+		message, err := stream.Recv()
 		if err == io.EOF {
 			break
 		}
